@@ -1,4 +1,6 @@
 import React from 'react';
+import Chart from './Chart.jsx';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -6,8 +8,11 @@ class App extends React.Component {
   }
 
   render() {
+      console.log(Chart);
       return (
-          <div>The React App works!!!</div>
+          <div>The React App works!!!
+              <Chart />
+          </div>
       );
   };
 };
