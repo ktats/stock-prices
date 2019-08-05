@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Bar, Line, Pie } from 'react-chartjs-2';
 import axios from 'axios';
+import moment from 'moment';
 
 //check out default properties 
 
@@ -35,7 +36,7 @@ class Chart extends Component {
             },
 
             line: {
-                labels: [1,2,3,4,5],
+                labels: [1,2,5,3],
                 datasets: [{
                     data: [10,20,35, 50, 80],
                     label: 'test1',
@@ -47,13 +48,30 @@ class Chart extends Component {
     }
 
     componentDidMount() {
-        this.getStockData('AAPL');
+        this.getStockData('AAPL', '5days');
     }
 
-    getStockData(ticker) {
-      axios.get(`/stocks/${ticker}`)
-       .then((data) => {
-           console.log(data)
+    getStockData(ticker, timeframe) {
+      axios.get(`/stocks/${ticker}/${timeframe}`)
+       .then((results) => {
+           console.log(results.data)
+           const prices = results.data
+           let labels = [];
+           let data = [];
+           for (let i = prices.length - 1; i >= 0; i--) {
+             labels.push(moment(prices[i].date).format('DD MMM'));
+             data.push(prices[i].close);
+           }
+           console.log(labels, data);
+           this.setState({
+               line: {
+                   labels,
+                   datasets: [{
+                       data,
+                       label: `${ticker}`
+                   }]
+               }
+           })
        })
     }
 
