@@ -10,19 +10,17 @@ class Menu extends React.Component {
         return (
             <div className={styles.menu}>
                 <div className={styles.menuTop}>
-                    <div className={styles.tickerBox}>
-                        <span className={styles.input}>Choose a stock:</span>
-                        <input></input>
-                    </div>
-                    <div className={styles.metricBox}>
-                        <span className={styles.input}>Choose a metric:</span>
+                    <div className={styles.timeframeBox}>
+                        <span className={styles.input}>Choose a timeframe: </span>
                         <select>
                             <option value="price">Price</option>
                         </select>
                     </div>
-                    <div className={styles.timeframeBox}>
-                        <span className={styles.input}>Choose a timeframe:</span>
-                        <input></input>
+                    <div className={styles.metricBox}>
+                        <span className={styles.input}>Choose a metric: </span>
+                        <select>
+                            <option value="price">Price</option>
+                        </select>
                     </div>
                 </div>
                 <div className={styles.menuBottom}>

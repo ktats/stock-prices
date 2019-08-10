@@ -21,33 +21,44 @@
 }
 
 .menu {
-    display: flex;
+    display: grid;
     grid-column: 3;
     grid-row: 3;
+    grid-auto-rows: minmax(10px, auto);
+    row-gap: 10px;
+    margin-left: 60px;
 }
 
-.menuTop {
+.menu .menuTop {
     display: flex;
+    grid-row: 1;
 }
 
-.menuBotom {
+.menu .menuBottom {
     display: flex;
+    grid-row: 2;
 }
 
-.tickerBox {
-    display: flex;
-    width: 50%;
-}
-
-.metricBox {
-    display: flex;
-    width: 50%;
-}
 
 .timeframeBox {
     display: flex;
-    /* justify-content: center; */
+    justify-content: left;
 }
+
+.menu .metricBox {
+    display: flex;
+    align-items: flex-end;
+    margin-left: 20px;
+}
+
+.menu .tickerBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 70px;
+}
+
+
 
 .input {
     margin-right: 10px;
