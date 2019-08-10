@@ -1,0 +1,9 @@
+.test {
+    color: green;
+}
+
+.chart {
+    display: flex;
+    width: 50%;
+    /* justify-content: center; */
+}
