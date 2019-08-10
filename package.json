@@ -35,7 +35,8 @@
     "react": "^16.8.6",
     "react-chartjs-2": "^2.7.6",
     "react-dev": "0.0.1",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "stocks.js": "0.0.17"
   },
   "devDependencies": {
     "webpack": "^4.39.1",

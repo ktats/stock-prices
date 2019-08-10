@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 const port = 2000;
 var intrinioSDK = require('intrinio-sdk');
-const intrinioKey = require('../keys.js');
+const intrinioKey = require('../keys.js').intrinioKey;
 intrinioSDK.ApiClient.instance.authentications['ApiKeyAuth'].apiKey = intrinioKey;
 
 console.log(new Date())

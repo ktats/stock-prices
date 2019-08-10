@@ -4,43 +4,21 @@ import axios from 'axios';
 import moment from 'moment';
 
 //check out default properties 
+// check out stock.js npm package 
 
 class Chart extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            chartData: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-
             line: {
                 labels: [1,2,5,3],
                 datasets: [{
                     data: [10,20,35, 50, 80],
                     label: 'test1',
-                }]
+                }],
+                fill: false,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)'
             }
         }
 
@@ -59,7 +37,8 @@ class Chart extends Component {
            let labels = [];
            let data = [];
            for (let i = prices.length - 1; i >= 0; i--) {
-             labels.push(moment(prices[i].date).format('DD MMM'));
+            //  labels.push(moment(prices[i].date).format('DD MMM'));
+            labels.push('');
              data.push(prices[i].close);
            }
            console.log(labels, data);
@@ -68,8 +47,12 @@ class Chart extends Component {
                    labels,
                    datasets: [{
                        data,
-                       label: `${ticker}`
-                   }]
+                       label: `${ticker}`,
+                       backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                       fill: false
+                   }],
+                   fill: false,
+                   backgroundColor: 'rgba(255, 99, 132, 0.2)'
                }
            })
        })
@@ -88,6 +71,9 @@ class Chart extends Component {
                 />   */}
               <Line 
                data={this.state.line}
+               fill={false}
+               height={200}
+               width={15}
                options={{ maintainAspectRatio: false }}
                />
             </div>
