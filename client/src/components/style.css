@@ -10,7 +10,7 @@
     grid-template-columns: 10% 10% 60% 10% 10%;
     /* The below function means that the minimum row height is 100, but if you go above 100 then the height of the row scales with the size of the div */
     grid-auto-rows: minmax(10px, auto);
-    row-gap: 20px;
+    row-gap: 10px;
 }
 
 .chart {
@@ -23,20 +23,21 @@
 .menu {
     display: grid;
     grid-column: 3;
-    grid-row: 3;
+    grid-row: 1;
     grid-auto-rows: minmax(10px, auto);
     row-gap: 10px;
-    margin-left: 60px;
 }
 
 .menu .menuTop {
     display: flex;
     grid-row: 1;
+    justify-content: center;
 }
 
 .menu .menuBottom {
     display: flex;
     grid-row: 2;
+    justify-content: center;
 }
 
 
@@ -55,11 +56,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 70px;
 }
 
 
 
-.input {
-    margin-right: 10px;
+.tickerInput {
+    margin-left: 10px;
 }
