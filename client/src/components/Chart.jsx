@@ -26,7 +26,7 @@ class Chart extends Component {
     }
 
     componentDidMount() {
-        this.getStockData('AAPL', '5days');
+        this.getStockData('AAPL', '5years');
     }
 
     getStockData(ticker, timeframe) {
