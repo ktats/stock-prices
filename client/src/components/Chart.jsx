@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Bar, Line, Pie } from 'react-chartjs-2';
 import axios from 'axios';
 import moment from 'moment';
+import styles from './style.css';
 
 //check out default properties 
 // check out stock.js npm package 
@@ -26,33 +27,37 @@ class Chart extends Component {
     }
 
     componentDidMount() {
-        this.getStockData('AAPL', '5days');
+        this.getStockData('AAPL', '5years');
     }
 
     getStockData(ticker, timeframe) {
       axios.get(`/stocks/${ticker}/${timeframe}`)
        .then((results) => {
-           console.log(results.data)
            const prices = results.data
            let labels = [];
-           let data = [];
+           let stockData = [];
            for (let i = prices.length - 1; i >= 0; i--) {
             //  labels.push(moment(prices[i].date).format('DD MMM'));
             labels.push('');
-             data.push(prices[i].close);
+             stockData.push(prices[i].close);
            }
-           console.log(labels, data);
+           console.log(labels, stockData);
            this.setState({
                line: {
                    labels,
                    datasets: [{
-                       data,
+                       data: stockData,
+                       lineTension: 0,
                        label: `${ticker}`,
                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                       fill: false
+                       borderColor: 'rgba(255, 99, 132, 0.2)',
+                       pointRadius: 0,
+                       fill: false,
+                       pointHoverRadius: 0,
+                       pointHoverBorderWidth: 5,
                    }],
                    fill: false,
-                   backgroundColor: 'rgba(255, 99, 132, 0.2)'
+                   backgroundColor: 'rgba(255, 99, 132, 0.2)',
                }
            })
        })
@@ -60,21 +65,47 @@ class Chart extends Component {
 
     render() {
         return (
-            <div className="chart">
-              {/* <Bar
-                data={this.state.chartData}
-                options={{ maintainAspectRatio: false, title: {
-                    display: true,
-                    text: 'Test Graph',
-                } }}
-                height={50}
-                />   */}
+            <div className={styles.chart}>
               <Line 
                data={this.state.line}
+               responsive={true}
                fill={false}
-               height={200}
+               height={300}
                width={15}
-               options={{ maintainAspectRatio: false }}
+               options={
+                   { 
+                       maintainAspectRatio: false,
+                       tooltips: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        hover: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                       scales: {
+                        yAxes: [{
+                            ticks: {
+                                display: true,
+                            },
+                            gridLines: {
+                              display: false,
+                              drawBorder: true,
+                          }
+                        }],
+                        xAxes: [{
+                          ticks: {
+                              display: true,
+                              beginAtZero: true,
+                          },
+                          gridLines: {
+                            display: false,
+                            drawBorder: true,
+                        }
+                      }],
+                      }
+                       
+                    }}
                />
             </div>
         )
