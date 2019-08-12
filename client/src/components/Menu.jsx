@@ -12,12 +12,18 @@ class Menu extends React.Component {
             ticker: 'TSLA',
         }
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleRefresh = this.handleRefresh.bind(this);
     }
 
     handleInputChange(e) {
       this.setState({
           [e.target.id]: e.target.value
       })
+    }
+
+    handleRefresh() {
+        const { ticker, timeframe, metric } = this.state;
+        this.props.refreshStockView(ticker, timeframe, metric);
     }
   
     render() {
@@ -48,6 +54,9 @@ class Menu extends React.Component {
                         <span className={styles.input}>Choose a stock:</span>
                         <input id='ticker' className={styles.tickerInput} onChange={this.handleInputChange}></input>
                     </div>
+                </div>
+                <div className={styles.refresh}>
+                    <button onClick={this.handleRefresh}>Refresh Graph</button>
                 </div>
             </div>
         );

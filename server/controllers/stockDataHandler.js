@@ -4,6 +4,7 @@ const stocks = new Stocks(alphaVantage);
 
 module.exports.stockDataHandler = (req, res) => {
     const { ticker, timeframe } = req.params;
+    console.log(ticker, timeframe);
     let interval, amount;
     if (timeframe === '1day') {
         interval = '15min';
@@ -36,7 +37,6 @@ module.exports.stockDataHandler = (req, res) => {
     }
     stocks.timeSeries(options)
         .then((results) => {
-        console.log(results);
-        res.send(results);
+          res.send(results);
     })
 }

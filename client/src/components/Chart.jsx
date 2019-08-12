@@ -41,7 +41,6 @@ class Chart extends Component {
             labels.push('');
              stockData.push(prices[i].close);
            }
-           console.log(labels, stockData);
            this.setState({
                line: {
                    labels,
@@ -49,8 +48,8 @@ class Chart extends Component {
                        data: stockData,
                        lineTension: 0,
                        label: `${ticker}`,
-                       backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                       borderColor: 'rgba(255, 99, 132, 0.2)',
+                       backgroundColor: '#020E4A',
+                       borderColor: '#020E4A',
                        pointRadius: 0,
                        fill: false,
                        pointHoverRadius: 0,
@@ -64,50 +63,56 @@ class Chart extends Component {
     }
 
     render() {
-        return (
-            <div className={styles.chart}>
-              <Line 
-               data={this.state.line}
-               responsive={true}
-               fill={false}
-               height={300}
-               width={15}
-               options={
-                   { 
-                       maintainAspectRatio: false,
-                       tooltips: {
-                            mode: 'index',
-                            intersect: false
-                        },
-                        hover: {
-                            mode: 'index',
-                            intersect: false
-                        },
-                       scales: {
-                        yAxes: [{
+        if (this.props.line) {
+            return (
+                <div className={styles.chart}>
+                <Line 
+                data={this.props.line}
+                responsive={true}
+                fill={false}
+                height={300}
+                width={15}
+                options={
+                    { 
+                        maintainAspectRatio: false,
+                        tooltips: {
+                                mode: 'index',
+                                intersect: false
+                            },
+                            hover: {
+                                mode: 'index',
+                                intersect: false
+                            },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    display: true,
+                                },
+                                gridLines: {
+                                display: false,
+                                drawBorder: true,
+                            }
+                            }],
+                            xAxes: [{
                             ticks: {
                                 display: true,
+                                beginAtZero: true,
                             },
                             gridLines: {
-                              display: false,
-                              drawBorder: true,
-                          }
+                                display: false,
+                                drawBorder: true,
+                            }
                         }],
-                        xAxes: [{
-                          ticks: {
-                              display: true,
-                              beginAtZero: true,
-                          },
-                          gridLines: {
-                            display: false,
-                            drawBorder: true,
                         }
-                      }],
-                      }
-                    }}
-               />
-            </div>
-        )
+                        }}
+                />
+                </div>
+            )
+        } else {
+            return (
+                <div>placeholder</div>
+            )
+        }
     }
 }
 

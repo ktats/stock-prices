@@ -63,3 +63,8 @@
 .tickerInput {
     margin-left: 10px;
 }
+
+.refresh {
+    display: flex;
+    justify-content: center;
+}
