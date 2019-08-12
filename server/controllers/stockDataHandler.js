@@ -7,26 +7,26 @@ module.exports.stockDataHandler = (req, res) => {
     console.log(ticker, timeframe);
     let interval, amount;
     if (timeframe === '1day') {
-        interval = '15min';
-        amount = 26;
+        interval = '5min';
+        amount = 26*3;
     } else if (timeframe === '5days') {
         interval = '30min',
-        amount = 13*5;
+        amount = 11*5;
     } else if (timeframe === '1month') {
         interval = 'daily';
-        amount = 31;
+        amount = 29;
     } else if (timeframe === '3months') {
         interval = 'daily';
-        amount = 92;
+        amount = 45;
     } else if (timeframe === '6months') {
         interval = 'daily';
-        amount = 184;
+        amount = 182;
     } else if (timeframe === '1year') {
         interval = 'weekly';
         amount = 52;
     } else if (timeframe === '5years') {
-        interval = 'monthly';
-        amount = 12*5;
+        interval = 'weekly';
+        amount = 52*5;
     }
     const options = {
         symbol: ticker,
@@ -37,6 +37,9 @@ module.exports.stockDataHandler = (req, res) => {
     }
     stocks.timeSeries(options)
         .then((results) => {
-          res.send(results);
-    })
+          res.send(results)
+        })
+        .catch((err) => {
+          console.log(err);
+        })
 }

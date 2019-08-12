@@ -22,45 +22,8 @@ class Chart extends Component {
                 backgroundColor: 'rgba(255, 99, 132, 0.2)'
             }
         }
-
-        this.getStockData = this.getStockData.bind(this);
     }
 
-    componentDidMount() {
-        this.getStockData('AAPL', '5years');
-    }
-
-    getStockData(ticker, timeframe) {
-      axios.get(`/stocks/${ticker}/${timeframe}`)
-       .then((results) => {
-           const prices = results.data
-           let labels = [];
-           let stockData = [];
-           for (let i = prices.length - 1; i >= 0; i--) {
-            //  labels.push(moment(prices[i].date).format('DD MMM'));
-            labels.push('');
-             stockData.push(prices[i].close);
-           }
-           this.setState({
-               line: {
-                   labels,
-                   datasets: [{
-                       data: stockData,
-                       lineTension: 0,
-                       label: `${ticker}`,
-                       backgroundColor: '#020E4A',
-                       borderColor: '#020E4A',
-                       pointRadius: 0,
-                       fill: false,
-                       pointHoverRadius: 0,
-                       pointHoverBorderWidth: 5,
-                   }],
-                   fill: false,
-                   backgroundColor: 'rgba(255, 99, 132, 0.2)',
-               }
-           })
-       })
-    }
 
     render() {
         if (this.props.line) {
@@ -89,7 +52,7 @@ class Chart extends Component {
                                     display: true,
                                 },
                                 gridLines: {
-                                display: false,
+                                display: true,
                                 drawBorder: true,
                             }
                             }],

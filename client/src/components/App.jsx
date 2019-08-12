@@ -3,6 +3,7 @@ import Chart from './Chart.jsx';
 import Menu from './Menu.jsx';
 import styles from './style.css';
 import axios from 'axios';
+import moment from 'moment';
 
 
 class App extends React.Component {
@@ -14,7 +15,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getStockData('AAPL', '1year');
+    this.getStockData('AAPL', '1month');
   }
 
   getStockData(ticker, timeframe) {
@@ -24,8 +25,11 @@ class App extends React.Component {
          let labels = [];
          let stockData = [];
          for (let i = prices.length - 1; i >= 0; i--) {
-          //  labels.push(moment(prices[i].date).format('DD MMM'));
-          labels.push('');
+           if (i % 6 === 0) {
+               labels.push(moment(prices[i].date).format('DD MMM'));
+           } else {
+               labels.push('');
+           }
            stockData.push(prices[i].close);
          }
          this.setState({
