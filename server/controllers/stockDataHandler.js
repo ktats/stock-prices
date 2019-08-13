@@ -20,7 +20,7 @@ module.exports.stockDataHandler = (req, res) => {
         amount = 45;
     } else if (timeframe === '6months') {
         interval = 'daily';
-        amount = 182;
+        amount = 84;
     } else if (timeframe === '1year') {
         interval = 'weekly';
         amount = 52;

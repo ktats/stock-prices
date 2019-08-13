@@ -4,6 +4,7 @@ import Menu from './Menu.jsx';
 import styles from './style.css';
 import axios from 'axios';
 import moment from 'moment';
+import Info from './Info.jsx';
 
 
 class App extends React.Component {
@@ -12,23 +13,36 @@ class App extends React.Component {
 
       this.getStockData = this.getStockData.bind(this);
       this.refreshStockView = this.refreshStockView.bind(this);
+      this.scrapeMW = this.scrapeMW.bind(this);
 
       this.state = {
           ticker: 'AAPL',
+          title: '',
+          description: '',
+          marketCap: '',
+          peRatio: '',
+          eps: '',
+          divYield: '',
       }
   }
 
   componentDidMount() {
-    this.getStockData('AAPL', '1month');
-    this.scrapeMW('AAPL');
+    // this.getStockData('AAPL', '1month');
+    // this.scrapeMW('AAPL');
   }
 
   scrapeMW(ticker) {
       axios.get(`/info/${ticker}`)
        .then(({data}) => {
-           console.log(data);
            const { title, description, marketCap, peRatio, eps, divYield } = data;
-           console.log(title);
+           this.setState({
+             title,
+             description,
+             marketCap,
+             peRatio,
+             eps,
+             divYield,
+           });
        })
        .catch(err => console.log(err));
   }
@@ -45,6 +59,9 @@ class App extends React.Component {
            } else {
                labels.push('');
            }
+        //    if (timeframe === '1day') {
+             
+        //    }
            stockData.push(prices[i].close);
          }
          this.setState({
@@ -86,6 +103,7 @@ class App extends React.Component {
                   { this.state && this.state.line &&
                      <Chart line={this.state.line}/>
                   }
+                  <Info attr={this.state}/>
               </div>
           );
   };
