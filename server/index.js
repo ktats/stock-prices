@@ -7,12 +7,15 @@ const path = require('path');
 const port = 2000;
 
 const stockDataHandler = require('./controllers/stockDataHandler.js').stockDataHandler;
+const infoHandler = require('./controllers/infoHandler.js').infoHandler;
 
 
 app.use(express.static(path.resolve(__dirname, '..', 'client', 'dist')));
 
 
 app.get('/stocks/:ticker/:timeframe', stockDataHandler)
+
+app.get('/info/:ticker', infoHandler)
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}!`);

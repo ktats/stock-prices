@@ -12,10 +12,25 @@ class App extends React.Component {
 
       this.getStockData = this.getStockData.bind(this);
       this.refreshStockView = this.refreshStockView.bind(this);
+
+      this.state = {
+          ticker: 'AAPL',
+      }
   }
 
   componentDidMount() {
     this.getStockData('AAPL', '1month');
+    this.scrapeMW('AAPL');
+  }
+
+  scrapeMW(ticker) {
+      axios.get(`/info/${ticker}`)
+       .then(({data}) => {
+           console.log(data);
+           const { title, description, marketCap, peRatio, eps, divYield } = data;
+           console.log(title);
+       })
+       .catch(err => console.log(err));
   }
 
   getStockData(ticker, timeframe) {
@@ -51,6 +66,13 @@ class App extends React.Component {
              }
          })
      })
+     // Only do this scrape if you changed your ticker
+     if (ticker !== this.state.ticker) {
+         this.scrapeMW(ticker);
+         this.setState({
+             ticker,
+         })
+     }
   }
 
   refreshStockView(ticker, timeframe, metric) {
