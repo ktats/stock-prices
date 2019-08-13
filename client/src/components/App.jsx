@@ -16,7 +16,7 @@ class App extends React.Component {
       this.scrapeMW = this.scrapeMW.bind(this);
 
       this.state = {
-          ticker: 'AAPL',
+          ticker: '',
           title: '',
           description: '',
           marketCap: '',
@@ -24,11 +24,6 @@ class App extends React.Component {
           eps: '',
           divYield: '',
       }
-  }
-
-  componentDidMount() {
-    // this.getStockData('AAPL', '1month');
-    // this.scrapeMW('AAPL');
   }
 
   scrapeMW(ticker) {
@@ -54,14 +49,19 @@ class App extends React.Component {
          let labels = [];
          let stockData = [];
          for (let i = prices.length - 1; i >= 0; i--) {
-           if (i % 6 === 0) {
-               labels.push(moment(prices[i].date).format('DD MMM'));
-           } else {
-               labels.push('');
+             if (timeframe === '1day') {
+                 if (i % 5 === 0) {
+                     labels.push(moment(prices[i].date).format('h hh'));
+                    } else {
+                        labels.push('');
+                    }
+                } else {
+                    if (i % 6 === 0) {
+                        labels.push(moment(prices[i].date).format('DD MMM'));
+                    } else {
+                        labels.push('');
+                    }
            }
-        //    if (timeframe === '1day') {
-             
-        //    }
            stockData.push(prices[i].close);
          }
          this.setState({

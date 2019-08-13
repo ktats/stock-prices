@@ -9,7 +9,7 @@ class Menu extends React.Component {
         this.state = {
             timeframe: '1day',
             metric: 'price',
-            ticker: 'TSLA',
+            ticker: '',
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleRefresh = this.handleRefresh.bind(this);
@@ -19,10 +19,6 @@ class Menu extends React.Component {
       this.setState({
           [e.target.id]: e.target.value
       })
-      if (e.target.id === 'timeframe') {
-          const { ticker, timeframe, metric } = this.state;
-          this.props.refreshStockView(ticker, timeframe, metric);
-      }
     }
 
     handleRefresh() {
