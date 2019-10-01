@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './style.css';
-import { privateEncrypt } from 'crypto';
 
 class Menu extends React.Component {
     constructor(props) {
@@ -16,9 +15,17 @@ class Menu extends React.Component {
     }
 
     handleInputChange(e) {
+      let updateCheck = false;
+      if (e.target.id === 'timeframe') {
+          updateCheck = true;
+      }
       this.setState({
           [e.target.id]: e.target.value
-      })
+      }, () => {
+        if (updateCheck) {
+            this.handleRefresh();
+        }
+      });
     }
 
     handleRefresh() {
@@ -56,7 +63,7 @@ class Menu extends React.Component {
                     </div>
                 </div>
                 <div className={styles.refresh}>
-                    <button onClick={this.handleRefresh}>Refresh Graph</button>
+                    <button onClick={() => this.handleRefresh()}>Refresh Graph</button>
                 </div>
             </div>
         );

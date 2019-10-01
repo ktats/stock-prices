@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Bar, Line, Pie } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import moment from 'moment';
 import styles from './style.css';
@@ -73,7 +73,7 @@ class Chart extends Component {
             )
         } else {
             return (
-                <div>placeholder</div>
+                <div>Loading...</div>
             )
         }
     }
