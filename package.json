@@ -28,7 +28,7 @@
     "babel-loader": "^8.0.6",
     "chart.js": "^2.8.0",
     "cheerio": "^1.0.0-rc.3",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "intrinio-sdk": "^4.0.0",
     "moment": "^2.24.0",
     "nodemon": "^1.19.1",
